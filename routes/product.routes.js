@@ -4,6 +4,7 @@ const productRouter = express.Router();
 
 // Get All Products
 productRouter.get('/', async (req, res) => {
+    
     try {
         const products = await ProductModel.findAll();
         res.send(products);
