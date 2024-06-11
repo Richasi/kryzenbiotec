@@ -7,6 +7,7 @@ const { Authentication } = require("./middleware/authentication")
 //DB connection
 require("./db/connection");
 
+
 //router
 const { userRouter } = require("./routes/user.routes");
 const prodcutRouter = require("./routes/product.routes");
