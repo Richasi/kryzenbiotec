@@ -14,38 +14,37 @@ productRouter.get('/', async (req, res) => {
     }
 });
 
-// Get All Products for only specific user
-productRouter.get('/my-prod', async (req, res) => {
+// Get All Products for userID
+productRouter.get('/my-product', async (req, res) => {
     try {
-        const products = await ProductModel.findAll({ where: { user_id: req.userID } });
-        res.send(products);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal server error');
-    }
+        const products = await ProductModel.findAll({
+          where: { user_id: req.userID },
+        });
+        res.status(200).send(products);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Internal server error" });
+      }
 });
 
 // Create a Product
 productRouter.post('/create', async (req, res) => {
     try {
         const { name, description, price, image, product_type } = req.body;
-        console.log("Body", req.body);
-        const product = new ProductModel({
-            name,
-            description,
-            price,
-            image,
-            product_type,
-            user_id: req.userID,
+        const product = await ProductModel.create({
+          name,
+          description,
+          price,
+          image,
+          product_type,
+          user_id: req.userID,
         });
-        await product.save();
-        res.json({ message: 'Product created successfully' });
-        
-    } catch (err) {
+        res.status(201).send({ message: "Product created successfully", product });
+      } catch (err) {
         console.error(err);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-});
+        res.status(500).send({ message: "Internal server error" });
+      }
+    });
 
 // Update a Product
 productRouter.put('/edit/:id', async (req, res) => {
