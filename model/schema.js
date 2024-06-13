@@ -1,7 +1,24 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db/connection');
 
+// "email":"ab@gmail.com",
+//   "password": "abc@123"
+// const Vehicle = sequelize.define('Vehicle', {
+//   type: {
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   },
+//   model: {
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   },
+//   wheels: {
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   }
+// });
 
+// Define User model
 const UserModel = sequelize.define('User', {
   email: {
     type: DataTypes.STRING,
